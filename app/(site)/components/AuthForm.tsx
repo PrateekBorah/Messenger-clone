@@ -10,6 +10,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { DevTool } from "@hookform/devtools";
 
 type variant = "LOGIN" | "REGISTER";
 
@@ -37,6 +38,7 @@ export default function AuthForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -91,6 +93,7 @@ export default function AuthForm() {
   };
 
   return (
+    <>
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -163,5 +166,7 @@ export default function AuthForm() {
         </div>
       </div>
     </div>
+    <DevTool control={control}/>
+    </>
   );
 }
